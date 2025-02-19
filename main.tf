@@ -1,7 +1,7 @@
 
 #############################
 # Resource Declarations
-#############################
+############################
 
 # Create the VPC
 resource "aws_vpc" "main" {
