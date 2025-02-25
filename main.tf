@@ -19,7 +19,7 @@ resource "aws_internet_gateway" "main" {
   tags = {
     Name = "${var.vpc_name}-igw"
   }
-}
+}fdsfsdfsd
 
 # Create Public Subnets
 resource "aws_subnet" "public" {
