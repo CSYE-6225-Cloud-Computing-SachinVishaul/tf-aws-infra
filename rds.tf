@@ -60,7 +60,7 @@ resource "aws_db_instance" "csye6225_rds" {
   storage_type           = "gp2"
   engine                 = "mysql"
   engine_version         = "8.0"
-  instance_class         = "db.t3.micro"      # Cheapest available instance type
+  instance_class         = "db.t3.micro" # Cheapest available instance type
   identifier             = "csye6225"
   username               = "csye6225"
   password               = var.db_master_password
