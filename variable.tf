@@ -57,3 +57,29 @@ variable "key_name" {
   description = "AWS EC2 key pair name to enable SSH access"
   type        = string
 }
+
+
+variable "db_master_password" {
+  description = "Master password for the RDS instance"
+  type        = string
+  sensitive   = true
+}
+
+
+variable "db_url" {
+  type        = string
+  description = "Database connection URL (e.g., jdbc:mysql://<host>:<port>/dbname)"
+}
+
+variable "db_username" {
+  type        = string
+  description = "Database username for connecting to the database"
+}
+
+variable "db_password" {
+  type        = string
+  description = "Database password for connecting to the database"
+  sensitive   = true
+}
+
+
