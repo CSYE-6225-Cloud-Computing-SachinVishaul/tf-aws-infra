@@ -35,6 +35,9 @@ chmod 644 /opt/csye6225/.env
 
 # Restart the application service to load new environment variables
 systemctl restart myapp.service
+
+# Configure and restart the CloudWatch Agent
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/csye6225/cloudwatch-config.json -s
 EOF
 
   tags = {
