@@ -10,10 +10,10 @@ output "private_subnets" {
   value = aws_subnet.private[*].id
 }
 
-output "instance_public_ip" {
-  description = "Public IP of the deployed instance"
-  value       = aws_instance.csye6225_app_instance.public_ip
-}
+# output "instance_public_ip" {
+#   description = "Public IP of the deployed instance"
+#   value       = aws_instance.csye6225_app_instance.public_ip
+# }
 
 output "rds_endpoint" {
   description = "The endpoint of the RDS instance"
@@ -23,4 +23,9 @@ output "rds_endpoint" {
 output "s3_bucket_name" {
   description = "The name of the S3 bucket created for file storage"
   value       = aws_s3_bucket.csye6225_bucket.bucket
+}
+
+output "alb_dns_name" {
+  description = "DNS name of the application load balancer"
+  value       = aws_lb.csye6225_alb.dns_name
 }
