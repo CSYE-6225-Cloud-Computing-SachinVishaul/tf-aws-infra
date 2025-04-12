@@ -15,6 +15,11 @@ resource "aws_launch_template" "csye6225_asg" {
 
   user_data = base64encode(<<EOF
 #!/bin/bash
+# Retrieve DB password from Secrets Manager
+sudo snap install aws-cli --classic
+
+DB_PASSWORD=$(aws secretsmanager get-secret-value --secret-id db_master_password --query SecretString --output text)
+
 # Create or update the environment file
 cat <<EOL > /opt/csye6225/.env
 DB_URL=${var.db_url}
@@ -23,7 +28,7 @@ DB_PASSWORD=${var.db_password}
 RDS_DB_ENDPOINT=${aws_db_instance.csye6225_rds.address}
 S3_BUCKET_NAME=${aws_s3_bucket.csye6225_bucket.bucket}
 AWS_REGION=${var.aws_region}
-RDS_DB_PASSWORD=${var.db_master_password}
+RDS_DB_PASSWORD=$${DB_PASSWORD}
 EOL
 chmod 644 /opt/csye6225/.env
 systemctl restart myapp.service

@@ -63,7 +63,7 @@ resource "aws_db_instance" "csye6225_rds" {
   instance_class         = "db.t3.micro" # Cheapest available instance type
   identifier             = "csye6225"
   username               = "csye6225"
-  password               = var.db_master_password
+  password               = random_password.db_password.result
   db_name                = "csye6225"
   parameter_group_name   = aws_db_parameter_group.csye6225_db_pg.name
   db_subnet_group_name   = aws_db_subnet_group.csye6225_db_subnet_group.name
@@ -72,6 +72,8 @@ resource "aws_db_instance" "csye6225_rds" {
   publicly_accessible    = false
   skip_final_snapshot    = true
   deletion_protection    = false
+
+
 
   tags = {
     Name = "csye6225-rds"

@@ -40,3 +40,31 @@ resource "aws_lb_listener" "csye6225_listener" {
     target_group_arn = aws_lb_target_group.csye6225_tg.arn
   }
 }
+
+# resource "aws_lb_listener" "csye6225_listener_https" {
+#   load_balancer_arn = aws_lb.csye6225_alb.arn
+#   port              = "443"
+#   protocol          = "HTTPS"
+#   ssl_policy        = "ELBSecurityPolicy-2016-08"
+#   certificate_arn   = var.demo_certificate_arn
+
+#   default_action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.csye6225_tg.arn
+#   }
+# }
+
+resource "aws_lb_listener" "csye6225_listener_https" {
+  load_balancer_arn = aws_lb.csye6225_alb.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+
+  # Dynamically use the dev ACM certificate if in dev profile; otherwise use the demo certificate ARN.
+  certificate_arn = var.aws_profile == "dev" ? aws_acm_certificate.dev_cert[0].arn : var.demo_certificate_arn
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.csye6225_tg.arn
+  }
+}

@@ -82,4 +82,14 @@ variable "db_password" {
   sensitive   = true
 }
 
+variable "demo_certificate_arn" {
+  description = "Certificate ARN for demo environment imported from a third-party vendor"
+  type        = string
+}
+
+variable "dev_domain_name" {
+  description = "The domain name for which to request the ACM certificate in the dev environment (e.g., dev.example.com)"
+  type        = string
+}
+
 
