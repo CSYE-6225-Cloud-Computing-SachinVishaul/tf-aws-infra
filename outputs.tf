@@ -29,3 +29,13 @@ output "alb_dns_name" {
   description = "DNS name of the application load balancer"
   value       = aws_lb.csye6225_alb.dns_name
 }
+
+output "launch_template_id" {
+  description = "The ID of the Launch Template used for the autoscaling group"
+  value       = aws_launch_template.csye6225_asg.id
+}
+
+output "autoscaling_group_name" {
+  description = "The name of the Autoscaling Group"
+  value       = aws_autoscaling_group.csye6225_asg.name
+}

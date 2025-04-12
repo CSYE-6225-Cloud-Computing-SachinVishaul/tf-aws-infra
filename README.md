@@ -50,13 +50,29 @@ hclCopyaws_region = "us-east-1"
 environment = "dev"
 ```
 
-4. Plan and apply:
+## SSL Certificate Import for DEMO Environment
+
+To import your third-party SSL certificate (from Namecheap or another vendor) into AWS Certificate Manager (ACM), run:
+
 ```bash
-bashCopyterraform plan -var-file="terraform.tfvars"
+aws acm import-certificate \
+  --certificate file://path/to/certificate.pem \
+  --private-key file://path/to/private-key.pem \
+  --certificate-chain file://path/to/certificate-chain.pem \
+  --region <AWS_REGION>
+```
+
+Use the returned Certificate ARN in your load balancer configuration.
+
+4. Plan and apply:
+
+```bash
+terraform plan -var-file="terraform.tfvars"
 terraform apply -var-file="terraform.tfvars"
 ```
 
 ## Testing and Validation
+
 ```bash
 terraform validate
 terraform plan
